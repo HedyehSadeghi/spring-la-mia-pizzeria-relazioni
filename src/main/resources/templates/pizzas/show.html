@@ -2,15 +2,15 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/resources :: head('Pizza Details')"></head>
 <body>
-<h1> Pizza details</h1>
+<h1 class="text-danger"> Pizza details</h1>
 <p th:text="${pizza.name}"></p>
 <p th:text="${pizza.description}"></p>
 <p th:text="${pizza.price}"></p>
-<span>
-    <img th:src="@{${pizza.photo}}" alt=" ">
-</span>
-
-<a th:href="@{/pizzas}">Back to pizza list</a>
+<div>
+    <img th:src="@{${pizza.photo}}" alt=" " class="w-25">
+</div>
+<hr>
+<a class="btn btn-primary" th:href="@{/pizzas}" role="button"> Back to pizza list</a>
 
 <th:block th:replace="fragments/resources :: script"></th:block>
 </body>

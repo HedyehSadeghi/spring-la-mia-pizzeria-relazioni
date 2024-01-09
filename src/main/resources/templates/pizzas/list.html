@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/resources :: head('Pizza List')"></head>
 <body>
-<h1>Pizza List </h1>
+<h1 class="text-danger">Pizza List </h1>
 <table>
 
     <thead>
@@ -16,7 +16,8 @@
     <tr th:each="pizza: ${pizzaList}">
         <td th:text="${pizza.name}"></td>
         <td th:text="${pizza.price}"></td>
-        <td><a th:href="@{/pizzas/show/{name}(name=${pizza.name})}"> Detail</a></td>
+        <td><a class="btn btn-primary" th:href="@{/pizzas/show/{name}(name=${pizza.name})}" role="button"> Details </a>
+        </td>
     </tr>
     </tbody>
 </table>

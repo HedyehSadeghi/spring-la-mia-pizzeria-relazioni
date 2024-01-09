@@ -13,10 +13,7 @@
 <p th:text="${pizza.description}"></p>
 <p th:text="${pizza.price}"></p>
 <span>
-    <a th:href="@{https://upload.wikimedia.org/wikipedia/commons/c/c8/Pizza_Margherita_stu_spivack.jpg}">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/c/c8/Pizza_Margherita_stu_spivack.jpg"
-                 alt="Pizza Margherita">
-    </a>
+    <img th:src="@{${pizza.photo}}" alt=" ">
 </span>
 
 <a th:href="@{/pizzas}">Back to pizza list</a>

@@ -1,13 +1,6 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>pizza list
-    </title>
-</head>
+<head th:replace="fragments/resources :: head('Pizza List')"></head>
 <body>
 <h1>Pizza List </h1>
 <table>
@@ -28,5 +21,6 @@
     </tbody>
 </table>
 
+<th:block th:replace="fragments/resources :: script"></th:block>
 </body>
 </html>

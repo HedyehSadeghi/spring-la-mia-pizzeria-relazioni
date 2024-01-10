@@ -2,25 +2,55 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/resources :: head('Pizza List')"></head>
 <body>
-<h1 class="text-danger">Pizza List </h1>
-<table>
 
-    <thead>
-    <tr>
-        <th>Name</th>
-        <th>Price</th>
-    </tr>
-    </thead>
+<div class="container">
+    <h1 class="text-danger">Pizza List </h1>
 
-    <tbody>
-    <tr th:each="pizza: ${pizzaList}">
-        <td th:text="${pizza.name}"></td>
-        <td th:text="${pizza.price}"></td>
-        <td><a class="btn btn-primary" th:href="@{/pizzas/show/{name}(name=${pizza.name})}" role="button"> Details </a>
-        </td>
-    </tr>
-    </tbody>
-</table>
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Price</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="pizza: ${pizzaList}">
+            <td th:text="${pizza.name}"></td>
+            <td th:text="${pizza.price}"></td>
+            <td><a class="btn btn-primary" th:href="@{/pizzas/show/{name}(name=${pizza.name})}" role="button">
+                Details </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <a class="btn btn-success" th:href="@{/pizzas/create}" role="button">Add pizza</a>
+
+    <!--
+    <h1 class="text-danger">Pizza List </h1>
+    <table>
+
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Price</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="pizza: ${pizzaList}">
+            <td th:text="${pizza.name}"></td>
+            <td th:text="${pizza.price}"></td>
+            <td><a class="btn btn-primary" th:href="@{/pizzas/show/{name}(name=${pizza.name})}" role="button">
+                Details </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+    -->
+</div>
 
 <th:block th:replace="fragments/resources :: script"></th:block>
 </body>

@@ -18,7 +18,7 @@
         <tr th:each="pizza: ${pizzaList}">
             <td th:text="${pizza.name}"></td>
             <td th:text="${pizza.price}"></td>
-            <td><a class="btn btn-primary" th:href="@{/pizzas/show/{name}(name=${pizza.name})}" role="button">
+            <td><a class="btn btn-primary" th:href="@{/pizzas/show/{id}(id=${pizza.id})}" role="button">
                 Details </a>
             </td>
         </tr>

@@ -8,7 +8,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
@@ -29,15 +28,15 @@ public class PizzaController {
         return "pizzas/list";
     }
 
-    @GetMapping("/show/{name}")
-    public String show(@PathVariable String name, Model model) {
-        Optional<Pizza> result = pizzeriaRepository.findById(name);
+    @GetMapping("/show/{id}")
+    public String show(@PathVariable Integer id, Model model) {
+        Optional<Pizza> result = pizzeriaRepository.findById(id);
         if (result.isPresent()) {
             Pizza pizza = result.get();
             model.addAttribute("pizza", pizza);
             return "pizzas/show";
         } else {
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pizza " + name + " not found");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Pizza " + id + " not found");
         }
 
     }
@@ -53,16 +52,10 @@ public class PizzaController {
     @PostMapping("/create")
     public String store(@Valid @ModelAttribute("pizza") Pizza pizzaForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
-            return "/pizzas/create";
-        }
-        Optional<Pizza> pizzaWithName = pizzeriaRepository.findByName(pizzaForm.getName());
-        if (pizzaWithName.isPresent()) {
-            bindingResult.addError(new FieldError("pizza", "name", pizzaForm.getName(), false, null, null, "name is unique"));
             return "pizzas/create";
-        } else {
-            Pizza savedPizza = pizzeriaRepository.save(pizzaForm);
-            return "redirect:/pizzas/show/" + savedPizza.getName();
         }
+        Pizza savedPizza = pizzeriaRepository.save(pizzaForm);
+        return "redirect:/pizzas/show/" + savedPizza.getId();
     }
 
 

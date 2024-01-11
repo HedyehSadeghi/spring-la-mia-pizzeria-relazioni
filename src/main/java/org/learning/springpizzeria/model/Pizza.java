@@ -20,8 +20,8 @@ public class Pizza {
 
     @Lob
     private String photo;
-    
-    @DecimalMin(value = "0.0", inclusive = false)
+
+    @DecimalMin(value = "1.0", inclusive = false)
     @Column(nullable = false)
     private BigDecimal price;
 

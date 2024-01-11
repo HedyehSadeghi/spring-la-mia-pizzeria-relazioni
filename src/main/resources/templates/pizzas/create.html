@@ -36,7 +36,7 @@
 
         <div class="col-6">
             <label class="form-label">Price</label>
-            <input type="text" class="form-control" id="price" th:field="*{price}" th:errorClass="is-invalid">
+            <input type="number" class="form-control" id="price" th:field="*{price}" th:errorClass="is-invalid">
             <div class="invalid-feedback" th:if="${#fields.hasErrors('price')}">
                 <ul>
                     <li th:each="err : ${#fields.errors('price')}" th:text="${err}"></li>

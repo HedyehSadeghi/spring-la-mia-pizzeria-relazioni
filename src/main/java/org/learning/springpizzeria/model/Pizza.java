@@ -3,6 +3,7 @@ package org.learning.springpizzeria.model;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.NotNull;
 
 import java.math.BigDecimal;
 
@@ -21,7 +22,8 @@ public class Pizza {
     @Lob
     private String photo;
 
-    @DecimalMin(value = "1.0", inclusive = false)
+    @NotNull(message = "price must not be null")
+    @DecimalMin(value = "1.0", message = "price must be higher than 1")
     @Column(nullable = false)
     private BigDecimal price;
 

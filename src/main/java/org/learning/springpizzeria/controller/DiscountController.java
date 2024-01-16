@@ -35,7 +35,6 @@ public class DiscountController {
 
             Discount newDiscount = new Discount();
             newDiscount.setPizza(pizzaOnSale);
-            newDiscount.setTitle("Half price");
             newDiscount.setStartDate(LocalDate.now());
             newDiscount.setExpireDate(LocalDate.now().plusDays(10));
             model.addAttribute("discount", newDiscount);
@@ -56,7 +55,7 @@ public class DiscountController {
         //no errori: salvo su db
         Discount storedDiscount = discountRepository.save(formDiscount);
 
-        return " redirect:/pizzas/show/" + storedDiscount.getPizza().getId();
+        return "redirect:/pizzas/show/" + storedDiscount.getPizza().getId();
 
     }
 

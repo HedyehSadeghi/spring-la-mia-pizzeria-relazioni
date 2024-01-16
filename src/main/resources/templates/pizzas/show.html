@@ -24,7 +24,7 @@
     <h4 class="mt-5 mb-2">Special discounts!</h4>
     <a th:href="@{/discounts/create(pizzaId=${pizza.id})}" class="btn btn-primary">Add</a>
 
-    <div class="alert alert-info" th:if="${pizza.discounts.size() == 0}">
+    <div class="alert alert-info mt-2" th:if="${pizza.discounts.size() == 0}">
         No discounts available for this pizza
     </div>
 

@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/resources :: head('Discount create')"></head>
+<body>
+<div class="container">
+
+    <h1 class="text-danger">Create discount</h1>
+
+    <!-- attributi: Pizza pizza, Discount discount -->
+    <form
+            id="create-discount"
+            method="post"
+            th:action="@{/discounts/create}"
+            th:object="${discount}"
+            class="row g-3">
+
+        <div class="col-12">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" placeholder="Half price" th:field="*{title}">
+        </div>
+        <div class="col-md-6">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="startDate" th:field="*{startDate}">
+        </div>
+        <div class="col-md-6">
+            <label for="expireDate" class="form-label">Expire Date</label>
+            <input type="date" class="form-control" id="expireDate" th:field="*{expireDate}">
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-primary" th:href="@{/pizzas/show/{id}(id=${pizza.id})}">Cancel</a>
+        </div>
+    </form>
+</div>
+
+
+<th:block th:replace="fragments/resources :: script"></th:block>
+</body>
+</html>

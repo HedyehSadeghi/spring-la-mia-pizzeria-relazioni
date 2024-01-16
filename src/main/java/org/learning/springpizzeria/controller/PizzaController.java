@@ -2,7 +2,7 @@ package org.learning.springpizzeria.controller;
 
 import jakarta.validation.Valid;
 import org.learning.springpizzeria.model.Pizza;
-import org.learning.springpizzeria.repository.PizzeriaRepository;
+import org.learning.springpizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -20,7 +20,7 @@ import java.util.Optional;
 public class PizzaController {
 
     @Autowired
-    private PizzeriaRepository pizzeriaRepository;
+    private PizzaRepository pizzeriaRepository;
 
     @GetMapping
     public String index(Model model) {

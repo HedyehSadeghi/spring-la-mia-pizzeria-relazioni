@@ -45,6 +45,15 @@
             <td th:text="${discount.expireDate}"></td>
             <td class="d-flex justify-content-between">
                 <a th:href="@{/discounts/edit/{id}(id=${discount.id})}" class="btn btn-primary"> Edit </a>
+                <form
+                        th:action="@{/discounts/delete/{id}(id=${discount.id})}"
+                        method="post"
+                        onsubmit="return confirm('Are you sure?')"
+                >
+                    <button type="submit" class="btn btn-primary"> Delete</button>
+
+
+                </form>
             </td>
         </tr>
         </tbody>

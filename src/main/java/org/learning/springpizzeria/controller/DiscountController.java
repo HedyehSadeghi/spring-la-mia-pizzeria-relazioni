@@ -56,7 +56,7 @@ public class DiscountController {
         if ((formDiscount.getExpireDate() != null) && formDiscount.isExpireDateBeforeStartDate()) {
             formDiscount.setExpireDate(formDiscount.getStartDate().plusDays(5));
         }
-        
+
         //no errori: salvo su db
         Discount storedDiscount = discountRepository.save(formDiscount);
 
@@ -85,6 +85,19 @@ public class DiscountController {
         }
         Discount updatedDiscount = discountRepository.save(discountForm);
         return "redirect:/pizzas/show/" + updatedDiscount.getPizza().getId();
+
+    }
+
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Integer id) {
+        Optional<Discount> result = discountRepository.findById(id);
+        if (result.isPresent()) {
+            Discount discountToDelete = result.get();
+            discountRepository.delete(discountToDelete);
+            return "redirect:/pizzas/show/" + discountToDelete.getPizza().getId();
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Discount with id " + id + " not found");
+        }
 
     }
 

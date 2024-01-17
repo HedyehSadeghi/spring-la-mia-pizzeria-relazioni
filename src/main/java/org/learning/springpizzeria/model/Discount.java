@@ -69,4 +69,6 @@ public class Discount {
     public Boolean isDiscountAvailableToday() {
         return (expireDate.isAfter(LocalDate.now())) || (expireDate.isEqual(LocalDate.now()));
     }
+
+
 }

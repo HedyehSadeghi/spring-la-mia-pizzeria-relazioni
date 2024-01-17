@@ -2,6 +2,7 @@ package org.learning.springpizzeria.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.PastOrPresent;
 
 import java.time.LocalDate;
 
@@ -14,6 +15,7 @@ public class Discount {
     @Column(nullable = false)
     @NotEmpty
     private String title;
+    @PastOrPresent
     private LocalDate startDate;
     private LocalDate expireDate;
     @ManyToOne
@@ -57,5 +59,14 @@ public class Discount {
 
     public void setPizza(Pizza pizza) {
         this.pizza = pizza;
+    }
+
+    //Attributo derivato
+    public Boolean isExpireDateBeforeStartDate() {
+        return expireDate.isBefore(startDate);
+    }
+
+    public Boolean isDiscountAvailableToday() {
+        return (expireDate.isAfter(LocalDate.now())) || (expireDate.isEqual(LocalDate.now()));
     }
 }

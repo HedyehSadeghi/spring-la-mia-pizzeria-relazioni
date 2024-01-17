@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/resources :: head('Discount edit')"></head>
+<body>
+
+<div class="container">
+    <h3 class="text-danger"> Edit discount</h3>
+
+
+    <form
+            id="edit-discount"
+            method="post"
+            th:action="@{/discounts/edit/{id}(id=${discount.id})}"
+            th:object="${discount}"
+            class="row g-3">
+
+
+        <input type="hidden" th:field="*{pizza}">
+
+        <div class="col-12">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" th:field="*{title}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('title')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('title')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-md-6">
+            <label for="startDate" class="form-label">Start Date</label>
+            <input type="date" class="form-control" id="startDate" th:field="*{startDate}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('startDate')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('startDate')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+
+        <div class="col-md-6">
+            <label for="expireDate" class="form-label">Expire Date</label>
+            <input type="date" class="form-control" id="expireDate" th:field="*{expireDate}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('expireDate')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('expireDate')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-primary" th:href="@{/pizzas/show/{id}(id=*{pizza.id})}">Cancel</a>
+        </div>
+    </form>
+
+
+</div>
+
+
+<th:block th:replace="fragments/resources :: script"></th:block>
+</body>
+</html>

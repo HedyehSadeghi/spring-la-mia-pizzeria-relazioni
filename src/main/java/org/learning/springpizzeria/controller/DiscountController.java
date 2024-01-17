@@ -47,15 +47,44 @@ public class DiscountController {
 
 
     @PostMapping("/create")
-    public String store(@Valid @ModelAttribute("discount") Discount formDiscount, BindingResult bindingResult) {
+    public String store(@Valid @ModelAttribute("discount") Discount formDiscount, BindingResult bindingResult, Model model) {
         //valido oggetto
         if (bindingResult.hasErrors()) {
+            model.addAttribute("pizza", formDiscount.getPizza());
             return "discounts/create";
         }
+        if ((formDiscount.getExpireDate() != null) && formDiscount.isExpireDateBeforeStartDate()) {
+            formDiscount.setExpireDate(formDiscount.getStartDate().plusDays(5));
+        }
+        
         //no errori: salvo su db
         Discount storedDiscount = discountRepository.save(formDiscount);
 
         return "redirect:/pizzas/show/" + storedDiscount.getPizza().getId();
+
+    }
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Optional<Discount> result = discountRepository.findById(id);
+        if (result.isPresent()) {
+            model.addAttribute("discount", result.get());
+            return "discounts/edit";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Discount with id " + id + " not found");
+        }
+    }
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute Discount discountForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "discounts/edit";
+        }
+        if ((discountForm.getExpireDate() != null) && discountForm.isExpireDateBeforeStartDate()) {
+            discountForm.setExpireDate(discountForm.getStartDate().plusDays(5));
+        }
+        Discount updatedDiscount = discountRepository.save(discountForm);
+        return "redirect:/pizzas/show/" + updatedDiscount.getPizza().getId();
 
     }
 

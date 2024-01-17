@@ -24,6 +24,7 @@
     <h4 class="mt-5 mb-2">Special discounts!</h4>
     <a th:href="@{/discounts/create(pizzaId=${pizza.id})}" class="btn btn-primary">Add</a>
 
+
     <div class="alert alert-info mt-2" th:if="${pizza.discounts.size() == 0}">
         No discounts available for this pizza
     </div>
@@ -34,6 +35,7 @@
             <th>Title</th>
             <th>Start Date</th>
             <th>Expire Date</th>
+            <th></th>
         </tr>
         </thead>
         <tbody>
@@ -41,6 +43,9 @@
             <td th:text="${discount.title}"></td>
             <td th:text="${discount.startDate}"></td>
             <td th:text="${discount.expireDate}"></td>
+            <td class="d-flex justify-content-between">
+                <a th:href="@{/discounts/edit/{id}(id=${discount.id})}" class="btn btn-primary"> Edit </a>
+            </td>
         </tr>
         </tbody>
     </table>

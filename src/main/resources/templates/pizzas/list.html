@@ -26,7 +26,7 @@
         </thead>
 
         <tbody>
-        <tr th:each="pizza: ${pizzaList}">
+        <tr th:each="pizza: ${pizzaList}" th:classAppend="${pizza.activeDiscounts() ? 'table-success': ''}">
             <td th:text="${pizza.name}"></td>
             <td th:text="${pizza.price}"></td>
             <td class="d-flex justify-content-between">

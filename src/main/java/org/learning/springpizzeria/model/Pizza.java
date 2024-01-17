@@ -81,5 +81,15 @@ public class Pizza {
         this.discounts = discounts;
     }
 
+    public Boolean activeDiscounts() {
+        int counter = 0;
+        for (Discount discount : discounts) {
+            if (discount.isDiscountActive()) {
+                counter++;
+            }
+        }
+        return counter > 0;
+    }
+
 
 }

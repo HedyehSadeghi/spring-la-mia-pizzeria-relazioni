@@ -1,6 +1,7 @@
 package org.learning.springpizzeria.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 import java.time.LocalDate;
 
@@ -11,6 +12,7 @@ public class Discount {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
+    @NotEmpty
     private String title;
     private LocalDate startDate;
     private LocalDate expireDate;

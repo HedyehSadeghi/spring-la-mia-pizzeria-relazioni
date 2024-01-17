@@ -13,6 +13,8 @@
           th:object="${pizza}"
           th:action="@{/pizzas/edit/{id}(id=${pizza.id})}">
 
+
+        <input type="hidden" th:field="*{discounts}">
         <div class="col-6">
             <label class="form-label">Name</label>
             <input type="text" class="form-control" id="title" th:field="*{name}" th:errorClass="is-invalid">

@@ -3,6 +3,7 @@ package org.learning.springpizzeria.controller;
 import jakarta.validation.Valid;
 import org.learning.springpizzeria.model.Ingredient;
 import org.learning.springpizzeria.repository.IngredientRepository;
+import org.learning.springpizzeria.repository.PizzaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -22,6 +23,9 @@ public class IngredientController {
     @Autowired
     private IngredientRepository ingredientRepository;
 
+    @Autowired
+    private PizzaRepository pizzaRepository;
+
 
     @GetMapping
     public String list(Model model) {
@@ -31,16 +35,22 @@ public class IngredientController {
     }
 
 
-    /*public String create(){
-
+    @GetMapping("/create")
+    public String create(Model model) {
+        Ingredient ingredient = new Ingredient();
+        model.addAttribute("ingredient", ingredient);
+        return "ingredients/create";
     }
 
 
-    public String store(){
-
+    @PostMapping("/create")
+    public String store(@Valid @ModelAttribute("ingredient") Ingredient ingredientForm, BindingResult bindingResult, Model model) {
+        if (bindingResult.hasErrors()) {
+            return "ingredients/create";
+        }
+        Ingredient savedIngredient = ingredientRepository.save(ingredientForm);
+        return "redirect:/ingredients";
     }
-     */
-
 
     @GetMapping("/edit/{id}")
     public String edit(@PathVariable Integer id, Model model) {

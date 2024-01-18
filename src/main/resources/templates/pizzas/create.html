@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head th:replace="fragments/resources :: head('Create Pizza')"></head>
 
-
+<!-- Attributi : Pizza pizza, List<Ingredient> ingredientList  -->
 <body>
 <div class="container">
     <h3 class="mt-3 mb-5">Add your customized pizza: </h3>
@@ -52,6 +52,22 @@
                     <li th:each="err : ${#fields.errors('photo')}" th:text="${err}"></li>
                 </ul>
             </div>
+        </div>
+
+
+        <div class="col-4">
+            <h4>Ingredients</h4>
+            <div class="form-check" th:each="ingr : ${ingredientList}">
+                <input
+                        class="form-check-input"
+                        type="checkbox"
+                        th:value="${ingr.id}"
+                        th:id="|ingr-${ingr.id}|"
+                        th:field="*{ingredients}"
+                >
+                <label class="form-check-label" th:for="|ingr-${ingr.id}|" th:text="${ingr.name}"></label>
+            </div>
+
         </div>
 
 

@@ -23,12 +23,24 @@
 
     <h3 class="mt-4">Ingredients</h3>
     <div class="alert alert-info" th:if="${pizza.ingredients.size() ==0}"> The list is empty</div>
-    <ul>
-        <li th:each="ingr : ${pizza.ingredients}" th:text="${ingr.name}"></li>
-    </ul>
+
+    <table class="table" th:if="${pizza.ingredients.size() > 0}">
+        <thead>
+        <tr>
+            <th scope="col">Name</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="ingr : ${pizza.ingredients}">
+            <td th:text="${ingr.name}" class="col-9"></td>
+        </tr>
+        </tbody>
+    </table>
+
 
     <div class="d-flex justify-content-center">
-        <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-success">Add ingredient</a>
+        <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-success">Change ingredients</a>
     </div>
 
 

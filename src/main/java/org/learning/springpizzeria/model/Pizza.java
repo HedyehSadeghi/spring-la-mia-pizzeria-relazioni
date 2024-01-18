@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.DecimalMin;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.NotNull;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -31,7 +33,8 @@ public class Pizza {
     @OneToMany(mappedBy = "pizza", orphanRemoval = true)
     private List<Discount> discounts;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.PERSIST)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Ingredient> ingredients;
 
     public List<Ingredient> getIngredients() {

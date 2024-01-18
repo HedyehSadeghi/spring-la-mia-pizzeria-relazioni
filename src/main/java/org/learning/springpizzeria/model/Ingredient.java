@@ -2,6 +2,8 @@ package org.learning.springpizzeria.model;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import java.util.List;
 
@@ -16,6 +18,7 @@ public class Ingredient {
     private String name;
 
     @ManyToMany(mappedBy = "ingredients")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private List<Pizza> pizzas;
 
     public List<Pizza> getPizzas() {

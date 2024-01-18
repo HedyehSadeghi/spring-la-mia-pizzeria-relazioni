@@ -3,10 +3,49 @@
 <head th:replace="fragments/resources :: head('Ingredient List')"></head>
 <body>
 <div class="container">
+    <h3 class="text-danger my-3">Ingredient list</h3>
+
+
+    <div th:if="${redirectMessage != null}"
+         class="alert alert-success alert-dismissible fade show mt-4"
+         role="alert">
+        <div th:text="${redirectMessage}"></div>
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+
+    <div class="alert alert-info" th:if="${ingredientList.size() ==0}"> The list is empty</div>
+
+    <table class="table">
+        <thead>
+        <tr class="row">
+            <th scope="col" class="col-9">Name</th>
+            <th class="col-3"></th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each="ingr: ${ingredientList}" class="row">
+            <td th:text="${ingr.name}" class="col-9"></td>
+            <td class="d-flex justify-content-between col-3">
+                <a class="btn btn-primary" th:href="@{/ingredients/edit/{id}(id=${ingr.id})}" role="button">
+                    Edit </a>
+                <form
+                        th:action="@{/ingredients/delete/{id}(id=${ingr.id})}"
+                        method="post"
+                        onsubmit="return confirm('Are you sure?')">
+                    <button type="submit" class="btn btn-danger"> Delete</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--
     <h3 class="text-danger"> Ingredient list</h3>
     <ul>
         <li th:each="ingr : ${ingredientList}" th:text="${ingr.name}"></li>
     </ul>
+    -->
 
 
 </div>

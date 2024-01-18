@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:replace="fragments/resources :: head('Ingredient edit')"></head>
+<body>
+<!-- attributi: Ingredient ingredient -->
+<div class="container">
+    <h3 class="text-danger"> Edit ingredient</h3>
+
+
+    <form
+            id="edit-ingredient"
+            method="post"
+            th:action="@{/ingredients/edit/{id}(id=${ingredient.id})}"
+            th:object="${ingredient}"
+            class="row g-3">
+
+
+        <!-- <input type="hidden" th:field="*{pizza}"> -->
+
+        <div class="col-12">
+            <label for="name" class="form-label">Name</label>
+            <input type="text" class="form-control" id="name" th:field="*{name}" th:errorClass="is-invalid">
+            <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}">
+                <ul>
+                    <li th:each="err : ${#fields.errors('name')}" th:text="${err}"></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            <a class="btn btn-primary" th:href="@{/ingredients}">Cancel</a>
+        </div>
+    </form>
+
+
+</div>
+
+
+<th:block th:replace="fragments/resources :: script"></th:block>
+</body>
+</html>

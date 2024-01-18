@@ -1,6 +1,7 @@
 package org.learning.springpizzeria.model;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotEmpty;
 
 @Entity
 @Table(name = "ingredients")
@@ -9,6 +10,7 @@ public class Ingredient {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     @Column(nullable = false)
+    @NotEmpty
     private String name;
 
 

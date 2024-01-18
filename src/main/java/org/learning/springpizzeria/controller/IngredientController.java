@@ -1,15 +1,14 @@
 package org.learning.springpizzeria.controller;
 
+import jakarta.validation.Valid;
 import org.learning.springpizzeria.model.Ingredient;
 import org.learning.springpizzeria.repository.IngredientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
@@ -29,6 +28,41 @@ public class IngredientController {
         List<Ingredient> ingredientList = ingredientRepository.findAll();
         model.addAttribute("ingredientList", ingredientList);
         return "ingredients/list";
+    }
+
+
+    /*public String create(){
+
+    }
+
+
+    public String store(){
+
+    }
+     */
+
+
+    @GetMapping("/edit/{id}")
+    public String edit(@PathVariable Integer id, Model model) {
+        Optional<Ingredient> result = ingredientRepository.findById(id);
+        if (result.isPresent()) {
+            Ingredient ingredientToEdit = result.get();
+            model.addAttribute("ingredient", ingredientToEdit);
+            return "ingredients/edit";
+        } else {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Ingredient with id " + id + " not found");
+        }
+    }
+
+
+    @PostMapping("/edit/{id}")
+    public String update(@PathVariable Integer id, @Valid @ModelAttribute Ingredient ingredientForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "ingredients/edit";
+        }
+        Ingredient updatedIngredient = ingredientRepository.save(ingredientForm);
+        return "redirect:/ingredients";
+
     }
 
 

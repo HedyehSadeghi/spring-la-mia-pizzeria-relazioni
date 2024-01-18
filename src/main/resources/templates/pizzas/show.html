@@ -28,7 +28,7 @@
     </ul>
 
     <div class="d-flex justify-content-center">
-        <a th:href="@{/ingredients/create(pizzaId=${pizza.id})}" class="btn btn-success">Add ingredient</a>
+        <a th:href="@{/pizzas/edit/{id}(id=${pizza.id})}" class="btn btn-success">Add ingredient</a>
     </div>
 
 

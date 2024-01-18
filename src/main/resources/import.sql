@@ -6,3 +6,10 @@ INSERT INTO db_pizzeria.pizzas (id, description, name, photo, price) VALUES(3, '
 -- insert discount
 INSERT INTO db_pizzeria.discounts (id, expire_date, start_date, title, pizza_id) VALUES(1, '2024-02-10', '2024-01-15', 'half price', 1);
 INSERT INTO db_pizzeria.discounts (id, expire_date, start_date, title, pizza_id)VALUES(2, '2024-03-14', '2024-02-01', '10% discount', 1);
+
+-- insert ingredient
+INSERT INTO db_pizzeria.ingredients(id, name)VALUES(1, 'pomodoro');
+INSERT INTO db_pizzeria.ingredients(id, name)VALUES(2, 'olio');
+INSERT INTO db_pizzeria.ingredients(id, name)VALUES(3, 'mozzarella');
+INSERT INTO db_pizzeria.ingredients(id, name)VALUES(4, 'funghi');
+INSERT INTO db_pizzeria.ingredients(id, name)VALUES(5, 'origano');
